@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>ShopEase - E-Commerce</title>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; font-family: 'Segoe UI', sans-serif; }
+    body { background: #fff; color: #333; }
+
+    /* HEADER */
+    header {
+      background: #fff;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 20px 10%;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+      position: sticky;
+      top: 0;
+      z-index: 999;
+    }
+    header h1 { font-size: 1.8rem; color: #1e90ff; }
+    nav a {
+      margin-left: 25px;
+      text-decoration: none;
+      color: #333;
+      font-weight: 500;
+      transition: color 0.3s;
+    }
+    nav a:hover { color: #1e90ff; }
+
+    /* HERO */
+    .hero {
+      background: url('https://source.unsplash.com/1600x600/?fashion,shopping') no-repeat center center/cover;
+      height: 60vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      flex-direction: column;
+      text-align: center;
+      color: white;
+    }
+    .hero h2 { font-size: 3rem; margin-bottom: 10px; }
+    .hero p { font-size: 1.2rem; margin-bottom: 20px; }
+    .hero a {
+      background: #1e90ff;
+      color: white;
+      padding: 12px 25px;
+      text-decoration: none;
+      border-radius: 5px;
+      font-weight: bold;
+      transition: 0.3s;
+    }
+    .hero a:hover { background: #0c78d4; }
+
+    /* SECTIONS */
+    .section {
+      padding: 60px 10%;
+    }
+    .section h3 {
+      text-align: center;
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .categories, .products {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 30px;
+    }
+
+    .card {
+      background: #f9f9f9;
+      border-radius: 10px;
+      overflow: hidden;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.05);
+      transition: 0.3s;
+    }
+
+    .card:hover { transform: translateY(-5px); }
+    .card img {
+      width: 100%;
+      height: 200px;
+      object-fit: cover;
+    }
+    .card h4 { padding: 15px; font-size: 1.2rem; }
+    .price { padding: 0 15px 15px; color: #1e90ff; font-weight: bold; }
+
+    /* FOOTER */
+    footer {
+      background: #333;
+      color: white;
+      text-align: center;
+      padding: 20px 10%;
+      margin-top: 40px;
+    }
+
+    /* MODAL (LOGIN / SIGNUP) */
+    .modal {
+      position: fixed;
+      top: 0; left: 0;
+      width: 100%; height: 100%;
+      background: rgba(0,0,0,0.5);
+      display: none;
+      align-items: center;
+      justify-content: center;
+      z-index: 1000;
+    }
+
+    .modal-content {
+      background: white;
+      width: 350px;
+      padding: 30px;
+      border-radius: 10px;
+      position: relative;
+    }
+
+    .tabs {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+
+    .tabs button {
+      width: 50%;
+      padding: 10px;
+      background: #f1f1f1;
+      border: none;
+      cursor: pointer;
+    }
+
+    .tabs button.active {
+      background: #1e90ff;
+      color: white;
+      font-weight: bold;
+    }
+
+    form { display: none; }
+    form.active { display: block; }
+
+    input[type="email"], input[type="password"], input[type="text"] {
+      width: 100%;
+      padding: 10px;
+      margin: 10px 0 20px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 12px;
+      background: #1e90ff;
+      color: white;
+      border: none;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 10px; right: 15px;
+      font-size: 20px;
+      cursor: pointer;
+      color: #666;
+    }
+
+    .link {
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .link a {
+      color: #1e90ff;
+      text-decoration: none;
+    }
+
+    @media (max-width: 768px) {
+      .hero h2 { font-size: 2rem; }
+      nav a { margin-left: 10px; }
+    }
+  </style>
+</head>
+<body>
+
+  <!-- HEADER -->
+  <header>
+    <h1>ShopEase</h1>
+    <nav>
+      <a href="#">Home</a>
+      <a href="#categories">Categories</a>
+      <a href="#products">Products</a>
+      <a href="#" onclick="openModal()">Login</a>
+    </nav>
+  </header>
+
+  <!-- HERO -->
+  <section class="hero">
+    <h2>Shop the Latest Trends</h2>
+    <p>Exclusive styles for you. Limited-time deals!</p>
+    <a href="#products">Explore Now</a>
+  </section>
+
+  <!-- CATEGORIES -->
+  <section class="section" id="categories">
+    <h3>Shop by Category</h3>
+    <div class="categories">
+      <div class="card"><img src="https://source.unsplash.com/400x300/?clothing"><h4>Clothing</h4></div>
+      <div class="card"><img src="https://source.unsplash.com/400x300/?gadgets"><h4>Electronics</h4></div>
+      <div class="card"><img src="https://source.unsplash.com/400x300/?interior"><h4>Home Decor</h4></div>
+    </div>
+  </section>
+
+  <!-- PRODUCTS -->
+  <section class="section" style="background:#f3f3f3" id="products">
+    <h3>Featured Products</h3>
+    <div class="products">
+      <div class="card"><img src="https://source.unsplash.com/400x300/?shoe"><h4>Sporty Sneakers</h4><p class="price">₹2,499</p></div>
+      <div class="card"><img src="https://source.unsplash.com/400x300/?watch"><h4>Classic Watch</h4><p class="price">₹4,999</p></div>
+      <div class="card"><img src="https://source.unsplash.com/400x300/?bag"><h4>Leather Handbag</h4><p class="price">₹3,199</p></div>
+      <div class="card"><img src="https://source.unsplash.com/400x300/?headphones"><h4>Bluetooth Headset</h4><p class="price">₹1,999</p></div>
+    </div>
+  </section>
+
+  <!-- FOOTER -->
+  <footer>
+    <p>&copy; 2025 ShopEase. All rights reserved.</p>
+  </footer>
+
+  <!-- LOGIN/SIGNUP MODAL -->
+  <div class="modal" id="authModal">
+    <div class="modal-content">
+      <span class="close-btn" onclick="closeModal()">&times;</span>
+      <div class="tabs">
+        <button id="loginTab" class="active">Login</button>
+        <button id="signupTab">Signup</button>
+      </div>
+
+      <form id="loginForm" class="active">
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button class="submit-btn">Login</button>
+        <div class="link">Don't have an account? <a href="#" id="switchToSignup">Signup</a></div>
+      </form>
+
+      <form id="signupForm">
+        <input type="text" placeholder="Full Name" required>
+        <input type="email" placeholder="Email" required>
+        <input type="password" placeholder="Password" required>
+        <button class="submit-btn">Create Account</button>
+        <div class="link">Already have an account? <a href="#" id="switchToLogin">Login</a></div>
+      </form>
+    </div>
+  </div>
+
+  <!-- SCRIPT -->
+  <script>
+    const modal = document.getElementById('authModal');
+    const loginTab = document.getElementById('loginTab');
+    const signupTab = document.getElementById('signupTab');
+    const loginForm = document.getElementById('loginForm');
+    const signupForm = document.getElementById('signupForm');
+    const switchToSignup = document.getElementById('switchToSignup');
+    const switchToLogin = document.getElementById('switchToLogin');
+
+    function openModal() {
+      modal.style.display = 'flex';
+    }
+
+    function closeModal() {
+      modal.style.display = 'none';
+    }
+
+    loginTab.onclick = () => {
+      loginTab.classList.add('active');
+      signupTab.classList.remove('active');
+      loginForm.classList.add('active');
+      signupForm.classList.remove('active');
+    };
+
+    signupTab.onclick = () => {
+      signupTab.classList.add('active');
+      loginTab.classList.remove('active');
+      signupForm.classList.add('active');
+      loginForm.classList.remove('active');
+    };
+
+    switchToSignup.onclick = (e) => {
+      e.preventDefault();
+      signupTab.click();
+    };
+
+    switchToLogin.onclick = (e) => {
+      e.preventDefault();
+      loginTab.click();
+    };
+
+    window.onclick = function(event) {
+      if (event.target == modal) closeModal();
+    }
+  </script>
+</body>
+</html>
+
