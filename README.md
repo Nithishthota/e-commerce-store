@@ -23,6 +23,10 @@ Tech Stack:
 HTML5
 
 CSS3
+OUTPUT:
+
+
+     <img width="1920" height="1080" alt="Image" src="https://github.com/user-attachments/assets/7b538610-f03d-41b6-a050-3e5cce59cd26" />
 
 
 
